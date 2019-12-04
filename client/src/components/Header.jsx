@@ -36,10 +36,10 @@ export default class Header extends React.Component {
         </Link>
 
         <div className="links">
-          <Link to='/search'>
+          <Link to='/'>
             Find Yards
         </Link>
-          <Link>
+          <Link to='/rent'>
             Rent Your Yard
         </Link>
           {!this.props.currentUser ?

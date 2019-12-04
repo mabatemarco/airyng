@@ -6,6 +6,8 @@ import Header from './components/Header'
 import Front from './components/Front'
 import Footer from './components/Footer'
 import Login from './components/Login'
+import Yards from './components/Yards'
+import Rent from './components/Rent'
 
 class App extends React.Component {
   state = {
@@ -16,8 +18,9 @@ class App extends React.Component {
     userData: {
       username: '',
       password: '',
-      email: ''
-    },
+      email: '',
+      name: ''
+    }
   }
 
   componentDidMount = async () => {
@@ -27,11 +30,11 @@ class App extends React.Component {
         currentUser,
       })
     }
-    let currentZip = await getZip();
-    currentZip = parseInt(currentZip)
-    this.setState({
-      currentZip
-    })
+    // let currentZip = await getZip();
+    // currentZip = parseInt(currentZip)
+    // this.setState({
+    //   currentZip
+    // })
   }
 
   handleLogout = () => {
@@ -106,7 +109,22 @@ class App extends React.Component {
               loginSubmit={this.loginSubmit}
               registerSubmit={this.registerSubmit}
             />}
-          <Front />
+          {!this.state.currentUser &&
+            <Route exact path='/' render={() => (
+              <Front />)} />}
+
+          {this.state.currentUser &&
+            <>
+              <Route exact path='/' render={() => (
+              <Yards
+              currentUser={this.state.currentUser}
+              />)} />
+              <Route path='/rent' render={() => (
+                <Rent />
+              )} />
+
+
+            </>}
         </main>
 
 

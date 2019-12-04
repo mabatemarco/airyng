@@ -36,9 +36,13 @@ export default class Login extends React.Component {
               <p onClick={this.registerToggle}>Not a member?  Join Now</p>
             </>
           }
-          
+
           {this.state.register &&
             <>
+              <div className="pair">
+                <label htmlFor='name'>Full Name</label>
+                <input name='name' type='text' value={this.props.userData.name} onChange={this.props.handleChange} />
+              </div>
               <div className="pair">
                 <label htmlFor='email'>Email Address</label>
                 <input name='email' type='email' value={this.props.userData.email} onChange={this.props.handleChange} />

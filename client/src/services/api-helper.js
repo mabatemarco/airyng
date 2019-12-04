@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const zipURL = 'http://ip-api.com/json'
+const nearbyZipApi = 'oUbaIQVCBJn52ff2fq20V65SsYFM6tQHWPsPQqp0EIZOUkZBrLti8vBwDOWMyZ6D'
 
 
 const api = axios.create({
@@ -9,11 +10,13 @@ const api = axios.create({
 
 export const getZip = async () => {
   const response = await axios.get(zipURL)
-  return response.data.zip
+  const nearby = await axios.get(`https://cors-anywhere.herokuapp.com/https://www.zipcodeapi.com/rest/${nearbyZipApi}/radius.json/${response.data.zip}/2/mile`)
+  console.log(nearby)
+  return nearby.data.zipcodes
 }
 
 export const loginUser = async (loginData) => {
-  const resp = await api.post('/auth/login', loginData)
+  const resp = await api.post('/auth/login', { authentication: loginData })
   localStorage.setItem('authToken', resp.data.token);
   api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
   return resp.data.user
@@ -34,4 +37,8 @@ export const verifyUser = async () => {
     return resp.data
   }
   return false
+}
+
+export const createSpace = async () => {
+  const space=await api.post(/)
 }

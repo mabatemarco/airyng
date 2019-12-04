@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_000357) do
+ActiveRecord::Schema.define(version: 2019_12_04_164848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,23 +27,25 @@ ActiveRecord::Schema.define(version: 2019_12_04_000357) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
     t.boolean "booked"
     t.bigint "space_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.float "rate", null: false
     t.index ["space_id"], name: "index_schedules_on_space_id"
+    t.index ["user_id"], name: "index_schedules_on_user_id"
   end
 
   create_table "spaces", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
-    t.integer "rate"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.integer "zip"
+    t.string "street", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.integer "zip", null: false
     t.text "img_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -54,16 +56,17 @@ ActiveRecord::Schema.define(version: 2019_12_04_000357) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "email"
+    t.string "email", null: false
     t.text "img_url"
     t.string "about_me"
-    t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name", null: false
   end
 
   add_foreign_key "reviews", "spaces"
   add_foreign_key "reviews", "users"
   add_foreign_key "schedules", "spaces"
+  add_foreign_key "schedules", "users"
   add_foreign_key "spaces", "users"
 end
