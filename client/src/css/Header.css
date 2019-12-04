@@ -1,0 +1,72 @@
+header{
+  height:80px;
+  line-height: 80px;
+  display:flex;
+  justify-content: space-between;
+}
+
+header img{
+  height:60px;
+}
+
+header a, header p{
+  display: inline;
+  text-decoration: none;
+  color:black;
+  margin: 0 2em;
+  font-size: 1.3em;
+}
+
+header p{
+  cursor: pointer;
+}
+
+.links{
+  display:flex;
+}
+
+.ham-icon {
+  margin: auto 2em auto 2em;
+  width: 40px;
+}
+
+.ham-icon:after, 
+.ham-icon:before, 
+.ham-icon div {
+  background-color: black;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 5px;
+  margin: 7px 0;
+  transition: all .2s ease-in-out;
+}
+
+.clicked-ham:before {
+  transform: translateY(12px) rotate(135deg);
+}
+
+.clicked-ham:after {
+  transform: translateY(-12px) rotate(-135deg);
+}
+
+.clicked-ham div {
+  transform: scale(0);
+}
+
+.ham-menu{
+  position:absolute;
+  right:0;
+  top:80px;
+  border:1px solid black;
+  background:red;
+  z-index: 2;
+}
+
+.ham-menu a{
+  display:block;
+}
+
+.ham-menu a:first-of-type{
+  border-bottom:1px solid black;
+}

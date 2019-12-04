@@ -1,0 +1,26 @@
+.front{
+  padding:2em 0
+}
+
+.hero{
+  width:80%;
+  height:500px;
+  margin: 0 auto;
+  border:2px solid black;
+}
+
+
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+}
+
+.hero h1{
+  position:absolute;
+  color:white;
+  font-size: 4em;
+  letter-spacing: .8em;
+  top:38%;
+  left:35%
+}
