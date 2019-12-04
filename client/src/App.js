@@ -116,11 +116,13 @@ class App extends React.Component {
           {this.state.currentUser &&
             <>
               <Route exact path='/' render={() => (
-              <Yards
-              currentUser={this.state.currentUser}
-              />)} />
+                <Yards
+
+                />)} />
               <Route path='/rent' render={() => (
-                <Rent />
+                <Rent
+                  currentUser={this.state.currentUser}
+                />
               )} />
 
 

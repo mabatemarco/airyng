@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :spaces, only: [:index]
+  resources :spaces, only: [:index] do
+    resources :schedules
+  end
+
+  
   resources :users do
-    resource :spaces do
-      resource :reviews
-      resource :schedules
-    end
+    resource :spaces 
   end
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'

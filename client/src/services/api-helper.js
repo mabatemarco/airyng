@@ -39,6 +39,6 @@ export const verifyUser = async () => {
   return false
 }
 
-export const createSpace = async () => {
-  const space=await api.post(/)
+export const createSpace = async (userId, spaceData) => {
+  const space = await api.post(`/users/${userId}/spaces`, { space: spaceData })
 }
