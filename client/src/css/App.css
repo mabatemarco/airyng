@@ -9,4 +9,5 @@ main{
   background-image: url('../images/grass.JPG');
   background-position: center;
   background-size: cover;
+  padding:1em;
 }

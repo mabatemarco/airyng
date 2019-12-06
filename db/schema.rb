@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_04_164848) do
+ActiveRecord::Schema.define(version: 2019_12_06_013038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pics", force: :cascade do |t|
+    t.text "img_url"
+    t.bigint "space_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["space_id"], name: "index_pics_on_space_id"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.float "rating"
@@ -46,7 +54,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_164848) do
     t.string "city", null: false
     t.string "state", null: false
     t.integer "zip", null: false
-    t.text "img_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -64,6 +71,7 @@ ActiveRecord::Schema.define(version: 2019_12_04_164848) do
     t.string "name", null: false
   end
 
+  add_foreign_key "pics", "spaces"
   add_foreign_key "reviews", "spaces"
   add_foreign_key "reviews", "users"
   add_foreign_key "schedules", "spaces"

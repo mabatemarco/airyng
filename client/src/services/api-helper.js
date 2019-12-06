@@ -10,9 +10,9 @@ const api = axios.create({
 
 export const getZip = async () => {
   const response = await axios.get(zipURL)
-  const nearby = await axios.get(`https://cors-anywhere.herokuapp.com/https://www.zipcodeapi.com/rest/${nearbyZipApi}/radius.json/${response.data.zip}/2/mile`)
-  console.log(nearby)
-  return nearby.data.zipcodes
+  // const nearby = await axios.get(`https://cors-anywhere.herokuapp.com/https://www.zipcodeapi.com/rest/${nearbyZipApi}/radius.json/${response.data.zip}/2/mile`)
+  // console.log(nearby)
+  return response.data.zip
 }
 
 export const loginUser = async (loginData) => {
@@ -39,6 +39,24 @@ export const verifyUser = async () => {
   return false
 }
 
-export const createSpace = async (userId, spaceData) => {
-  const space = await api.post(`/users/${userId}/spaces`, { space: spaceData })
+export const createSpace = async (spaceData, images) => {
+  const space = await api.post(`/spaces`, { space: spaceData })
+  await images.forEach(async(image) => {
+    await addPic(space.data.id, image )
+  })
+}
+
+export const addPic = async (id, data) => {
+  console.log(data)
+  const response = await api.post(`spaces/${id}/pics`, {img_url:data})
+}
+
+export const allSpaces = async () => {
+  const response = await api.get('/spaces');
+  return response.data
+}
+
+export const oneSpace = async (id) => {
+  const response = await api.get(`/spaces/${id}`)
+  return response.data
 }

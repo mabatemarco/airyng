@@ -1,13 +1,14 @@
 import React from 'react';
 import './css/App.css';
 import { Link, Route, withRouter } from 'react-router-dom'
-import { verifyUser, getZip, registerUser, loginUser } from './services/api-helper.js'
+import { verifyUser, getZip, registerUser, loginUser, allSpaces } from './services/api-helper.js'
 import Header from './components/Header'
 import Front from './components/Front'
 import Footer from './components/Footer'
 import Login from './components/Login'
 import Yards from './components/Yards'
 import Rent from './components/Rent'
+import Yard from './components/Yard'
 
 class App extends React.Component {
   state = {
@@ -20,14 +21,15 @@ class App extends React.Component {
       password: '',
       email: '',
       name: ''
-    }
+    },
+    spaces: []
   }
 
   componentDidMount = async () => {
     const currentUser = await verifyUser();
     if (currentUser) {
       this.setState({
-        currentUser,
+        currentUser
       })
     }
     // let currentZip = await getZip();
@@ -36,6 +38,7 @@ class App extends React.Component {
     //   currentZip
     // })
   }
+
 
   handleLogout = () => {
     this.setState({
@@ -77,6 +80,7 @@ class App extends React.Component {
         currentUser,
         login: false
       })
+      this.props.history.push('/')
     }
   }
 
@@ -87,6 +91,7 @@ class App extends React.Component {
       currentUser,
       login: false
     })
+    this.props.history.push('/')
   }
 
   render() {
@@ -117,14 +122,20 @@ class App extends React.Component {
             <>
               <Route exact path='/' render={() => (
                 <Yards
-
+                  spaces={this.state.spaces}
                 />)} />
               <Route path='/rent' render={() => (
                 <Rent
                   currentUser={this.state.currentUser}
+                  history={this.props.history}
+                />
+
+              )} />
+              <Route path='/yard/:id' render={(props) => (
+                <Yard
+                  yardId={props.match.params.id}
                 />
               )} />
-
 
             </>}
         </main>

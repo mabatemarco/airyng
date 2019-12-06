@@ -1,0 +1,104 @@
+.rent form{
+  background-color: white;
+  border:1px solid black;
+  text-align: left;
+}
+
+.rent h1{
+  margin:0 auto 1em auto;
+  padding:.5em 0;
+  color: black;
+  text-shadow: 1px 1px white;
+  background-color:white;
+  width:40%;
+  border: 1px solid black;
+}
+
+.rent-flex{
+  display:flex;
+  justify-content: space-evenly;
+  margin:1em 0;
+}
+
+.rent .left,.rent .right{
+  width:45%;
+}
+
+.rent .pair{
+  margin:.8em 0;
+}
+
+.rent label{
+  margin:0 0 0 .5em;
+  font-size: 1.5em;
+}
+
+.rent input,.rent textarea{
+  width:100%;
+  border:1px solid black;
+  border-radius: 5px;
+}
+
+.rent input{
+  height:30px;
+  font-size: 1.3em;
+}
+
+.rent textarea{
+  height:120px;
+  font-size: 1.2em;
+}
+
+.state-zip{
+  display:flex;
+  justify-content: space-between;
+}
+
+.state-zip .pair{
+  width:45%
+}
+
+.rent-pics{
+  width:90%;
+  margin: 1em auto;
+}
+
+.add-pics{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:90%;
+  margin:1em auto;
+  height:80px
+}
+
+.add-pics input{
+  width:60%;
+  margin:0;
+}
+
+.add-pics button{
+  width:20%;
+  margin:auto;
+}
+
+.rent button{
+  display:block;
+  margin:1em auto
+}
+
+.current-pics{
+  width:95%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border:1px solid black;
+  margin: 0 auto;
+}
+
+.current-pics img{
+  width:30%;
+  height:200px;
+  object-fit: cover;
+  margin:1em;
+}

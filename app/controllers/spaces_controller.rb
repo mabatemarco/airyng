@@ -1,22 +1,22 @@
 class SpacesController < ApplicationController
   before_action :set_space, only: [:show, :update, :destroy]
+  before_action :authorize_request, except: [:index, :show]
 
   # GET /spaces
   def index
-    @spaces = Space.all
+    @spaces = Space.all.order(updated_at: :desc)
 
-    render json: @spaces
+    render json: @spaces, include: :pics
   end
 
   # GET /spaces/1
   def show
-    render json: @space
+    render json: @space, include: [:user, :schedules, :pics]
   end
 
   # POST /users/:user_id/spaces
   def create
-    @user=User.find(params[:user_id])
-    @space = @user.spaces.new(space_params)
+    @space = @current_user.spaces.new(space_params)
 
     if @space.save
       render json: @space, status: :created
@@ -47,6 +47,6 @@ class SpacesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def space_params
-      params.require(:space).permit(:name, :description, :rate, :street, :city, :state, :zip, :img_url, :user_id)
+      params.require(:space).permit(:name, :description, :rate, :street, :city, :state, :zip, :user_id)
     end
 end

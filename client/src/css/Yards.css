@@ -1,0 +1,62 @@
+.space{
+  display:flex;
+  justify-content: space-between;
+  width:90%;
+  border:2px solid black;
+  background-color: white;
+  margin: .5em auto;
+  text-align: left;
+  position:relative;
+}
+
+.space-img{
+  height:200px;
+  width:30%;
+  margin:.2em .4em;
+}
+
+.space img{
+  height:100%;
+  width:100%;
+  object-fit: cover;
+}
+
+.info{
+  width:50%;
+}
+
+.spaces button{
+  font-size: 1.2em;
+  position:absolute;
+  bottom: -10px;
+  left:32%;
+  width:auto;
+  height:30px
+}
+
+iframe{
+  height:200px;
+  width:20%;
+  margin: auto .2em
+}
+
+.spaces h1{
+  margin:0 auto;
+  padding:.5em 0;
+  color: black;
+  text-shadow: 1px 1px white;
+  background-color:white;
+  width:40%;
+  border: 1px solid black;
+}
+
+.space h2{
+  margin: .3em 0 .3em .8em;
+}
+
+.blurb{
+  overflow: scroll;
+  height:110px;
+  width:95%;
+  margin: 0 0 0 .5em
+}

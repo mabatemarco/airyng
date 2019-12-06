@@ -1,0 +1,95 @@
+.yard{
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+}
+
+.yard-imgs{
+  height:400px;
+  width:100%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  margin: 1em auto;
+  display:flex;
+}
+
+.main-img{
+  width:60%;
+  height:100%;
+  flex-grow:2
+}
+
+.main-img img{
+  width:100%;
+  height:100%;
+}
+
+.other-imgs{
+  width:40%;
+  height:100%;
+  display:flex;
+  flex-wrap: wrap
+}
+
+.other-imgs img{
+  object-fit: cover;
+  border:1px solid black;
+  box-sizing: border-box;
+  flex-grow: 2;
+}
+
+.flex{
+  display:flex;
+  justify-content: center;
+}
+
+.description{
+  text-align: right;
+  margin: 1em 0 0 1em;
+  width:50%;
+  border-right:1px solid black;
+}
+
+.description h2{
+  margin: 1em 1em;
+}
+
+.description p{
+  font-size: 1.3em;
+  font-weight: 400;
+  margin: 1em
+}
+
+.schedules{
+  width:30%;
+  position:sticky;
+  top:20px;
+}
+
+.yard-title{
+  display:flex;
+  justify-content: space-between;
+}
+
+.yard-title img{
+  height:70px;
+  width:70px;
+  object-fit: cover;
+  border-radius:100%
+}
+
+.user-info{
+  text-align: center;
+  margin: 0 2em 0 0
+}
+
+.user-info a{
+  display:block;
+  margin:auto
+}
+
+.yard-map{
+  width:90%;
+  height:300px;
+  margin: 0 auto;
+}
