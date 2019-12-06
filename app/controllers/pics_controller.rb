@@ -1,5 +1,5 @@
 class PicsController < ApplicationController
-  before_action :set_pic, only: [:show, :update, :destroy]
+  before_action :set_pic, only: [:show, :update]
 
   # GET /pics
   def index
@@ -36,7 +36,8 @@ class PicsController < ApplicationController
 
   # DELETE /pics/1
   def destroy
-    @pic.destroy
+    @pics=Space.find(params[:space_id]).pics
+    @pics.destroy
   end
 
   private

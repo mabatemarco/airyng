@@ -41,14 +41,14 @@ export const verifyUser = async () => {
 
 export const createSpace = async (spaceData, images) => {
   const space = await api.post(`/spaces`, { space: spaceData })
-  await images.forEach(async(image) => {
-    await addPic(space.data.id, image )
+  await images.forEach(async (image) => {
+    await addPic(space.data.id, image)
   })
 }
 
 export const addPic = async (id, data) => {
   console.log(data)
-  const response = await api.post(`spaces/${id}/pics`, {img_url:data})
+  const response = await api.post(`spaces/${id}/pics`, { img_url: data })
 }
 
 export const allSpaces = async () => {
@@ -59,4 +59,12 @@ export const allSpaces = async () => {
 export const oneSpace = async (id) => {
   const response = await api.get(`/spaces/${id}`)
   return response.data
+}
+
+export const editSpace = async (id, spaceData, images) => {
+  const space = await api.put(`/spaces/${id}`, { space: spaceData });
+  await api.delete(`/spaces/${id}/pics/no`)
+  await images.forEach(async (image) => {
+    await addPic(space.data.id, image)
+  })
 }

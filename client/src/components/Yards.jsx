@@ -27,7 +27,6 @@ export default class Yards extends Component {
         <div className="spaces">
           {this.state.spaces.map(space => {
             const address = space.street.split(' ').join('+')
-            console.log(address)
             return (
               <div className="space" key={space.id}>
                 

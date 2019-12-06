@@ -14,7 +14,7 @@ class SpacesController < ApplicationController
     render json: @space, include: [:user, :schedules, :pics]
   end
 
-  # POST /users/:user_id/spaces
+  # POST spaces
   def create
     @space = @current_user.spaces.new(space_params)
 
@@ -27,6 +27,7 @@ class SpacesController < ApplicationController
 
   # PATCH/PUT /spaces/1
   def update
+    @space=Space.find(params[:id])
     if @space.update(space_params)
       render json: @space
     else

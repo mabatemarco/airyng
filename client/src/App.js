@@ -124,13 +124,14 @@ class App extends React.Component {
                 <Yards
                   spaces={this.state.spaces}
                 />)} />
-              <Route path='/rent' render={() => (
-                <Rent
-                  currentUser={this.state.currentUser}
-                  history={this.props.history}
-                />
+            <Route path='/rent/:id' render={(props) => (
+              <Rent
+                id={props.match.params.id}
+                currentUser={this.state.currentUser}
+                history={this.props.history}
+              />
 
-              )} />
+            )} />
               <Route path='/yard/:id' render={(props) => (
                 <Yard
                   yardId={props.match.params.id}

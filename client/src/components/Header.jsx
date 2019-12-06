@@ -39,7 +39,7 @@ export default class Header extends React.Component {
           <Link to='/'>
             Find Yards
         </Link>
-          <Link to='/rent'>
+          <Link to='/rent/new'>
             Rent Your Yard
         </Link>
           {!this.props.currentUser ?

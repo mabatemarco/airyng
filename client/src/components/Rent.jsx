@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../css/Rent.css';
-import { createSpace } from '../services/api-helper.js'
+import { oneSpace, createSpace, editSpace } from '../services/api-helper.js';
+
 
 
 export default class Rent extends Component {
@@ -13,8 +14,41 @@ export default class Rent extends Component {
       state: '',
       zip: '',
     },
+    update: false,
     images: [],
     newImage: ''
+  }
+
+  componentDidMount = () => {
+    if (isNaN(this.props.id)) {
+      this.setState({
+        update: false
+      })
+
+    } else {
+
+      this.setState({
+        update: true
+      })
+      this.getSpace(parseInt(this.props.id))
+    }
+  }
+
+  getSpace = async (id) => {
+    const space = await oneSpace(id)
+    const images = space.pics.map(pic=>{return pic.img_url});
+    const { name, description, street, city, state, zip } = space;
+    this.setState({
+      images,
+      spaceData: {
+        name,
+        description,
+        street,
+        city,
+        state,
+        zip
+      }
+    })
   }
 
   handleChange = (e) => {
@@ -37,15 +71,19 @@ export default class Rent extends Component {
 
   spaceSubmit = async (e) => {
     e.preventDefault()
-    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length>0) {
-      const response = await createSpace(this.state.spaceData, this.state.images)
+    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length > 0) {
+      if (this.state.update === false) {
+        const response = await createSpace(this.state.spaceData, this.state.images)
+      } else {
+        const response = await editSpace(parseInt(this.props.id),this.state.spaceData, this.state.images)
+      }
       this.props.history.push('/')
     }
   }
 
   addImage = (e) => {
     e.preventDefault();
-    if (this.state.newImage.includes('/')&&this.state.images.length<5) {
+    if (this.state.newImage.includes('/') && this.state.images.length < 5) {
       this.setState(prevState => ({
         images: [...prevState.images, this.state.newImage],
         newImage: ''
@@ -56,7 +94,7 @@ export default class Rent extends Component {
   removeImage = (e) => {
     const img = e.target.src
     const images = this.state.images.filter(image => (
-      image==img
+      image !== img
     ))
     this.setState({
       images
@@ -102,7 +140,7 @@ export default class Rent extends Component {
             </div>
           </div>
           <div className="rent-pics">
-            <label htmlFor='img_url'>Image URL <small>(max 5)</small></label><br />
+            <label htmlFor='img_url'>Image URL <small>(max 5, click images to remove)</small></label><br />
             <div className="add-pics">
               <input name='newImage' type='text' value={this.state.newImage} onChange={this.handleImageChange} />
               <button onClick={this.addImage}>Add</button>
