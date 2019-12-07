@@ -20,7 +20,7 @@ export default class Rent extends Component {
   }
 
   componentDidMount = () => {
-    if (isNaN(this.props.id)) {
+    if (isNaN(this.props.yardId)) {
       this.setState({
         update: false
       })
@@ -30,7 +30,7 @@ export default class Rent extends Component {
       this.setState({
         update: true
       })
-      this.getSpace(parseInt(this.props.id))
+      this.getSpace(parseInt(this.props.yardId))
     }
   }
 
@@ -71,11 +71,11 @@ export default class Rent extends Component {
 
   spaceSubmit = async (e) => {
     e.preventDefault()
-    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length > 0) {
+    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length > 0 &&this.state.images.length<6) {
       if (this.state.update === false) {
         const response = await createSpace(this.state.spaceData, this.state.images)
       } else {
-        const response = await editSpace(parseInt(this.props.id),this.state.spaceData, this.state.images)
+        const response = await editSpace(parseInt(this.props.yardId),this.state.spaceData, this.state.images)
       }
       this.props.history.push('/')
     }
@@ -92,10 +92,10 @@ export default class Rent extends Component {
   }
 
   removeImage = (e) => {
-    const img = e.target.src
-    const images = this.state.images.filter(image => (
-      image !== img
-    ))
+    const img = e.target.src;
+    const index = this.state.images.indexOf(img);
+    const images = this.state.images;
+    images.splice(index, 1);
     this.setState({
       images
     })
@@ -147,8 +147,8 @@ export default class Rent extends Component {
             </div>
           </div>
           <div className="current-pics">
-            {this.state.images.map(image => (
-              <img onClick={this.removeImage} src={image} alt="" />
+            {this.state.images.map((image, index) => (
+              <img key={index} onClick={this.removeImage} src={image} alt="" />
             ))}
           </div>
           <button onClick={this.spaceSubmit}>Rent my Yard!</button>

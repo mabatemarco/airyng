@@ -4,8 +4,8 @@ const zipURL = 'http://ip-api.com/json'
 const nearbyZipApi = 'oUbaIQVCBJn52ff2fq20V65SsYFM6tQHWPsPQqp0EIZOUkZBrLti8vBwDOWMyZ6D'
 
 
-const baseUrl='https://airyng.herokuapp.com'
-// const baseUrl='http://localhost:3000'
+// const baseUrl='https://airyng.herokuapp.com'
+const baseUrl = 'http://localhost:3000'
 
 const api = axios.create({
   baseURL: baseUrl
@@ -44,16 +44,13 @@ export const verifyUser = async () => {
   return false
 }
 
-export const createSpace = async (spaceData, images) => {
-  const space = await api.post(`/spaces`, { space: spaceData })
-  await images.forEach(async (image) => {
-    await addPic(space.data.id, image)
-  })
+export const getUser = async (id) => {
+  const response = await api.get(`/users/${id}`)
+  return response.data
 }
 
-export const addPic = async (id, data) => {
-  console.log(data)
-  const response = await api.post(`spaces/${id}/pics`, { img_url: data })
+export const deleteUser = async (id) => {
+  const user = await api.delete(`/users/${id}`)
 }
 
 export const allSpaces = async () => {
@@ -66,10 +63,30 @@ export const oneSpace = async (id) => {
   return response.data
 }
 
-export const editSpace = async (id, spaceData, images) => {
-  const space = await api.put(`/spaces/${id}`, { space: spaceData });
-  await api.delete(`/spaces/${id}/pics/no`)
+export const createSpace = async (spaceData, images) => {
+  const space = await api.post(`/spaces`, { space: spaceData })
   await images.forEach(async (image) => {
     await addPic(space.data.id, image)
   })
+}
+
+export const editSpace = async (id, spaceData, images) => {
+  const space = await api.put(`/spaces/${id}`, { space: spaceData });
+  deletePic(id)
+  await images.forEach(async (image) => {
+    await addPic(space.data.id, image)
+  })
+}
+
+export const deleteSpace = async (id) => {
+  const space = await api.delete(`/spaces/${id}`)
+}
+
+export const addPic = async (id, data) => {
+  console.log(data)
+  const response = await api.post(`spaces/${id}/pics`, { img_url: data })
+}
+
+export const deletePic = async (id) => {
+  await api.delete(`/spaces/${id}/pics`)
 }

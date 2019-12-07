@@ -1,5 +1,7 @@
 class PicsController < ApplicationController
   before_action :set_pic, only: [:show, :update]
+  before_action :authorize_request, except: [:index, :show]
+
 
   # GET /pics
   def index
@@ -34,10 +36,10 @@ class PicsController < ApplicationController
     end
   end
 
-  # DELETE /pics/1
-  def destroy
+  # DELETE /pics
+  def clear
     @pics=Space.find(params[:space_id]).pics
-    @pics.destroy
+    @pics.destroy_all
   end
 
   private
@@ -48,6 +50,6 @@ class PicsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def pic_params
-      params.require(:pic).permit(:img_url)
+      params.require(:pic).permit(:img_url, :space_id)
     end
 end

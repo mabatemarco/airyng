@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../css/Yard.css';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { oneSpace } from '../services/api-helper.js';
 import yardClip from '../images/yardclip.jpg';
 import user from '../images/user.png'
 
-export default class Yard extends Component {
+class Yard extends Component {
   state = {
     space: {},
     address:'',
@@ -29,9 +29,7 @@ export default class Yard extends Component {
     let images = this.state.images.filter(image => {
       return image.img_url !== newMain
     })
-    console.log(images)
     images.unshift({ img_url: newMain });
-    console.log(images)
     this.setState({
       images
     })
@@ -103,7 +101,7 @@ export default class Yard extends Component {
                       <img src={this.state.space.user.img_url} alt="" /> :
                       <img src={user} alt="" />
                     }
-                    <Link to={`profiles/${this.state.space.user.id}`}>{this.state.space.user.username}</Link>
+                  <p onClick={() => { this.props.history.push(`/profile/${this.state.space.user.id}`) }}>{this.state.space.user.username}</p>
                   </div>}
               </div>
               <p>{this.state.space.description}</p>
@@ -118,3 +116,4 @@ export default class Yard extends Component {
     )
   }
 }
+export default withRouter(Yard)

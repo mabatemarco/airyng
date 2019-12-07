@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Yards from './components/Yards'
 import Rent from './components/Rent'
 import Yard from './components/Yard'
+import Profile from './components/Profile'
 
 class App extends React.Component {
   state = {
@@ -124,17 +125,24 @@ class App extends React.Component {
                 <Yards
                   spaces={this.state.spaces}
                 />)} />
-            <Route path='/rent/:id' render={(props) => (
-              <Rent
-                id={props.match.params.id}
-                currentUser={this.state.currentUser}
-                history={this.props.history}
-              />
 
-            )} />
+              <Route path='/rent/:id' render={(props) => (
+                <Rent
+                  yardId={props.match.params.id}
+                  currentUser={this.state.currentUser}
+                  history={this.props.history}
+                />
+              )} />
+
               <Route path='/yard/:id' render={(props) => (
                 <Yard
                   yardId={props.match.params.id}
+                />
+              )} />
+
+              <Route path='/profile/:id' render={(props) => (
+                <Profile
+                  profileId={props.match.params.id}
                 />
               )} />
 
