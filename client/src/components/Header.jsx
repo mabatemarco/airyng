@@ -53,10 +53,10 @@ export default class Header extends React.Component {
           }
           {this.state.menu &&
             <div className="ham-menu">
-              <Link to={`/profile/${this.props.currentUser.id}`}>
+              <Link onClick={() => { this.hamToggle(); this.menuToggle() }} to={`/profile/${this.props.currentUser.id}`}>
                 Profile
               </Link>
-            <p onClick={() => { this.props.logout(); this.menuToggle() }}>
+            <p onClick={() => { this.props.logout(); this.hamToggle(); this.menuToggle() }}>
                 Log Out
               </p>
             </div>}

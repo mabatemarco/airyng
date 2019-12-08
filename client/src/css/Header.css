@@ -3,6 +3,7 @@ header{
   line-height: 80px;
   display:flex;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 header img{
@@ -61,7 +62,16 @@ header p{
   border:1px solid black;
   background:red;
   z-index: 2;
-  transition: 3s;
+  animation: slideIn .6s ease-out
+}
+
+@keyframes slideIn{
+  0% {
+    right:-160px
+  }
+  100%{
+    right:0
+  }
 }
 
 .ham-menu a{

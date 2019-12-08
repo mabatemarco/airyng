@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
 import '../css/Profile.css';
-import {getUser} from '../services/api-helper.js'
+import { getUser, getUserSpaces, editUser, deleteUser } from '../services/api-helper.js';
+import user from '../images/user.png';
+import clip from '../images/yardclip.jpg';
+import { Link } from 'react-router-dom'
 
 export default class Profile extends Component {
   state = {
     user: {
+      id:'',
       username: '',
-      name:'',
+      name: '',
       email: '',
       img_url: '',
-      about_me:''
+      about_me: ''
     },
     spaces: [],
-    schedules:[]
+    rentals: [],
+    edit: false
   }
 
   componentDidMount = async () => {
     const user = await getUser(this.props.profileId)
-    const { username, email, img_url, about_me, name, spaces, schedules } = user
+    const spaces = await getUserSpaces(user.id)
+    const { id, username, email, img_url, about_me, name, schedules } = user
     this.setState({
       user: {
+        id,
         username,
         name,
         email,
@@ -27,14 +34,122 @@ export default class Profile extends Component {
         about_me
       },
       spaces,
-      schedules
+      rentals: schedules,
+      edit: false
     })
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        [name]: value
+      }
+    }))
+  }
+
+  editToggle = (e) => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      edit: !prevState.edit
+    }))
+  }
+
+  profileEdit = (e) => {
+    e.preventDefault()
+  }
+
+  profileDelete = (e) => {
+    e.preventDefault();
+    deleteUser(this.state.user.id)
+    localStorage.removeItem('authToken')
+    this.props.logout()
   }
 
   render() {
     return (
       <div className='profile'>
-        
+        <div className="user-info">
+          <div className="profile-img">
+            {this.state.user.img_url ?
+              <img src={this.state.user.img_url} alt="" /> :
+              <img src={user} alt="" />}
+            {this.state.edit &&
+              <input name='img_url' type='img_url' placeholder="Image URL" value={this.state.user.img_url} onChange={this.props.handleChange} />
+            }
+          </div>
+          <div className="profile-info">
+            <div className="titles">
+              <h3>Username:</h3>
+              <h3>Name:</h3>
+              <h3>Email:</h3>
+              <h3>About Me:</h3>
+            </div>
+            <div className="content">
+              {this.state.edit ?
+                <>
+                  <input name='username' type='username' value={this.state.user.username} onChange={this.props.handleChange} />
+                  <input name='name' type='name' value={this.state.user.name} onChange={this.props.handleChange} />
+                  <input name='email' type='email' value={this.state.user.email} onChange={this.props.handleChange} />
+                  <textarea name='about_me' type='about_me' value={this.state.user.about_me} onChange={this.props.handleChange} />
+                </> :
+                <>
+                  <h3>{this.state.user.username}</h3>
+                  <h3>{this.state.user.name}</h3>
+                  <h3>{this.state.user.email}</h3>
+                  {this.state.user.about_me ?
+                    <h3>{this.state.user.about_me}</h3> :
+                    <h3>Tell us about yourself!</h3>
+                  }
+                </>
+              }
+              {this.state.edit ?
+                <button onClick={this.profileEdit}>Save</button>
+                :
+                <>
+                  <button onClick={this.editToggle}>Edit Profile</button>
+                  <button onClick={this.profileDelete}>Delete Profile</button>
+                </>
+              }
+            </div>
+          </div>
+        </div>
+        {this.state.spaces.length>0 &&
+          <>
+            <h2>My Yards</h2>
+            <div className="spaces">
+              {this.state.spaces.map(space => {
+                const address = space.street.split(' ').join('+')
+                return (
+                  <div className="space" key={space.id}>
+
+                    {space.pics.length > 0 &&
+                      <div className="space-img">
+                        {space.pics[0].img_url ?
+                          <img src={space.pics[0].img_url} alt="" /> :
+                          <img src={clip} alt="" />}
+                      </div>}
+                    <div className="info">
+                      <h2>{space.name} - <small>{space.city}, {space.state}</small></h2>
+                      <div className="blurb">
+                        <p>{space.description}</p>
+                      </div>
+                      <div className="buttons">
+                        <Link to={`/rent/${space.id}`}>
+                          <button>Edit Yard</button>
+                        </Link>
+                        <Link to={`/bookings/${space.id}`}>
+                          <button>Bookings and Schedule</button>
+                        </Link>
+                      </div>
+                    </div>
+                    <iframe src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${address},${space.city}+${space.state}`}></iframe>
+                  </div>)
+              })}
+            </div>
+          </>
+        }
       </div>
     )
   }

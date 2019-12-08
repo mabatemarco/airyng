@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :users
+  get '/users/:id/spaces', to: 'users#user_spaces'
   delete '/spaces/:space_id/pics', to: 'pics#clear'
   post '/auth/login', to: 'authentication#login'
   get '/auth/verify', to: 'authentication#verify'

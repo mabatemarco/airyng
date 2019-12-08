@@ -1,0 +1,68 @@
+.profile{
+  background-color: white;
+}
+
+.user-info{
+  display:flex;
+}
+
+.profile-img{
+  width:30%;
+  margin:1em 2em 1em 3em;
+  border:1px solid black
+}
+
+.profile-img input{
+  display:block;
+  width:80%;
+  margin: 0 auto .5em auto;
+  font-size: 1.4em;
+  border-radius: 5px;
+}
+
+.profile-info{
+  display:flex;
+  width:60%
+}
+
+.titles{
+  width:27%;
+  text-align: left;
+}
+
+.content{
+  text-align:left;
+  width:50%;
+  margin: .5em 0 0 0
+}
+
+.content input{
+  display:block;
+  width:100%;
+  font-size: 1.35em;
+  border-radius: 5px;
+  margin:.4em 0
+}
+
+textarea{
+  width:100%;
+  height:150px;
+  border-radius: 5px;
+  font-size: 1.35em;
+}
+
+.profile .buttons{
+  display:flex;
+  position:absolute;
+  bottom: -10px;
+  left:32%;
+}
+
+.profile .buttons button{
+  position:static
+}
+
+.content button{
+  font-size: 1.3em;
+  width:auto
+}

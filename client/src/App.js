@@ -142,7 +142,8 @@ class App extends React.Component {
 
               <Route path='/profile/:id' render={(props) => (
                 <Profile
-                  profileId={props.match.params.id}
+                profileId={props.match.params.id}
+                logout={this.handleLogout}
                 />
               )} />
 

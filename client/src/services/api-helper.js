@@ -49,6 +49,10 @@ export const getUser = async (id) => {
   return response.data
 }
 
+export const editUser = async (id) => {
+  const user = await api.put(`users/${id}`)
+}
+
 export const deleteUser = async (id) => {
   const user = await api.delete(`/users/${id}`)
 }
@@ -60,6 +64,11 @@ export const allSpaces = async () => {
 
 export const oneSpace = async (id) => {
   const response = await api.get(`/spaces/${id}`)
+  return response.data
+}
+
+export const getUserSpaces = async (id) => {
+  const response = await api.get(`/users/${id}/spaces`)
   return response.data
 }
 

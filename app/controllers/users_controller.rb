@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  before_action :set_user, only: %i[show update destroy user_spaces]
   before_action :authorize_request, except: :create
 
   # GET /users
@@ -11,7 +11,13 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user, include: [:spaces, :schedules]
+    @user = User.find(params[:id])
+    render json: @user, include: [:schedules]
+  end
+
+  def user_spaces
+    @spaces=@user.spaces
+    render json: @spaces, include: [:pics, :schedules]
   end
 
   # POST /users
