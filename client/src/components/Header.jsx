@@ -40,15 +40,15 @@ export default class Header extends React.Component {
           </Link>}
 
         <div className="links">
-          <Link to='/yards'>
+          <Link className='underline' to='/yards'>
             Browse Yards
             </Link>
           {this.props.currentUser &&
-            <Link to='/rent/new'>
+            <Link className='underline' to='/rent/new'>
               Rent Your Yard
         </Link>}
           {!this.props.currentUser ?
-            <p onClick={this.props.loginToggle}>
+            <p className='underline' onClick={this.props.loginToggle}>
               Login/Register
             </p>
             :
