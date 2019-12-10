@@ -60,3 +60,28 @@ iframe{
   width:95%;
   margin: 0 0 0 .5em
 }
+
+.yards-search{
+  width:70%;
+  background:white;
+  margin:0 auto;
+  border:2px solid black;
+  font-size: 1.3em;
+  padding:.5em
+}
+
+.yards-search button{
+  width:auto;
+  font-size: 1.1em;
+  margin:auto
+}
+
+.yards-search input{
+  width:15%;
+  margin: auto 2em auto 1em;
+  height:20px
+}
+
+.yards-search label{
+  margin:auto
+}

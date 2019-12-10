@@ -1,26 +1,50 @@
 
 
 .hero{
+  text-align: center;
   width:80%;
   height:500px;
   margin: 0 auto;
   border:2px solid black;
-}
-
-
-.hero img{
-  width:100%;
-  height:100%;
-  object-fit: cover;
+  position:relative
 }
 
 .hero h1{
-  position:absolute;
   color:white;
   font-size: 4em;
-  letter-spacing: .8em;
-  top:38%;
-  left:35%
+  letter-spacing: .4em;
+  margin: 13%
+}
+
+.hero > figure {
+  animation: imageAnimation 24s linear infinite 0s;
+  backface-visibility: hidden;
+  background-size: cover;
+  background-position: center center;
+  color: transparent;
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 0;
+  margin: 0;
+}
+.hero > figure:nth-child(1) { 
+  background-image: url('../images/backyard2.jpg'); 
+}
+.hero > figure:nth-child(2) {
+animation-delay: 6s;
+background-image: url('../images/backyard3.jpg');
+}
+.hero > figure:nth-child(3) {
+animation-delay: 12s;
+background-image: url('../images/backyard4.jpg');
+}
+.hero > figure:nth-child(4) {
+animation-delay: 18s;
+background-image: url('../images/backyard1.png');
 }
 
 .about{
@@ -42,4 +66,29 @@
   margin: .5em auto;
   height:200px;
   object-fit: cover;
+}
+
+@keyframes
+imageAnimation {  0% {
+ animation-timing-function: ease-in;
+ opacity: 0;
+}
+ 8% {
+ animation-timing-function: ease-out;
+ opacity: 1;
+}
+ 17% {
+ opacity: 1
+}
+ 25% {
+ opacity: 0
+}
+ 100% {
+ opacity: 0
+}
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

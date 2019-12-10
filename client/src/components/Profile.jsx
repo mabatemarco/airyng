@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Profile.css';
-import { getUser, getUserSpaces, editUser, deleteUser } from '../services/api-helper.js';
+import { getUser, editUser, deleteUser } from '../services/api-helper.js';
 import user from '../images/user.png';
 import clip from '../images/yardclip.jpg';
 import { Link } from 'react-router-dom'
@@ -15,7 +15,7 @@ export default class Profile extends Component {
       about_me: ''
     },
     spaces: [],
-    rentals: [],
+    schedules: [],
     edit: false,
     id: ''
   }
@@ -33,7 +33,7 @@ export default class Profile extends Component {
       },
       id,
       spaces,
-      rentals: schedules,
+      schedules,
       edit: false
     })
   }
@@ -155,6 +155,23 @@ export default class Profile extends Component {
               })}
             </div>
           </>
+        }
+        {this.state.schedules.length > 0 &&
+          <div className="profile-schedules">
+            <h2>Upcoming Rentals</h2>
+          {this.state.schedules.map(time => (
+              <Link to={`/yard/${time.space.id}`}>
+              <div className="profile-schedule">
+                <div className="info">
+                  <h2>{time.space.name}</h2>
+                  <p>{time.date}: {time.start_time}-{time.end_time}</p>
+                </div>
+                <img src={time.space.pics[0].img_url} alt="" />
+                <iframe src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${time.space.street.split(' ').join('+')},${time.space.city}+${time.space.state}`}></iframe>
+              </div>
+              </Link>
+            ))}
+          </div>
         }
       </div>
     )

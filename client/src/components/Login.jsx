@@ -3,7 +3,7 @@ import '../css/Login.css';
 
 export default class Login extends React.Component {
   state = {
-    register: false
+    register: false,
   }
 
   registerToggle = () => {

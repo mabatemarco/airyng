@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    render json: @user, include: [{ spaces:  {include: [:schedules, :pics]}  }, {schedules: {include: :space}}]
+    render json: @user, include: [{ spaces:  {include: [:schedules, :pics]}  }, {schedules: {include: {space: {include: :pics}}}}]
   end
 
   # POST /users

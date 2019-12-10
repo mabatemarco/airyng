@@ -6,7 +6,11 @@ import { allSpaces } from '../services/api-helper.js'
 
 export default class Yards extends Component {
   state = {
-    spaces: []
+    spaces: [],
+    search: {
+      city: '',
+      date: ''
+    }
   }
 
   componentDidMount = () => {
@@ -20,10 +24,56 @@ export default class Yards extends Component {
     })
   }
 
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      search: {
+        ...prevState.search,
+        [name]: value
+      }
+    }))
+  }
+
+  search = async (e) => {
+    e.preventDefault();
+    let allTheSpaces = await allSpaces()
+    let spaces = []
+    if (this.state.search.date) {
+      spaces = allTheSpaces.filter(space => {
+        for (let i = 0; i < space.schedules.length; i++) {
+          if (space.schedules[i].date === this.state.search.date) {
+            if (this.state.search.city) {
+              if (space.city === this.state.search.city) {
+                return space
+              }
+            } else {
+              return space
+            }
+          }
+        }
+      })
+    }
+    if (this.state.search.city) {
+      spaces = allTheSpaces.filter(space => (
+        space.city === this.state.search.city
+      ))
+    }
+    this.setState({
+      spaces
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Find the yard for you</h1>
+        <div className="yards-search">
+          <label htmlFor='city'>City</label>
+          <input name='city' type='text' value={this.state.search.city} onChange={this.handleChange} />
+          <label htmlFor='date'>Date</label>
+          <input name='date' type='date' value={this.state.search.date} onChange={this.handleChange} />
+          <button onClick={this.search}>Search</button>
+        </div>
         <div className="spaces">
           {this.state.spaces.map(space => {
             const address = space.street.split(' ').join('+')

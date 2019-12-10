@@ -68,3 +68,16 @@
 .schedules-booked{
   text-align: left;
 }
+
+.booked-profile img{
+  height:100px;
+  width:100px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.booked-profile{
+  display:flex;
+  height:100px;
+  line-height: 100px;;
+}

@@ -24,7 +24,7 @@ class App extends React.Component {
       email: '',
       name: ''
     },
-    spaces: []
+    spaces: [],
   }
 
   componentDidMount = async () => {
@@ -33,6 +33,9 @@ class App extends React.Component {
       this.setState({
         currentUser
       })
+      if (this.props.history.length === 2) {
+        this.props.history.push('/yards')
+      }
     }
     // let currentZip = await getZip();
     // currentZip = parseInt(currentZip)
@@ -74,9 +77,6 @@ class App extends React.Component {
     }
     const currentUser = await loginUser(loginData);
     if (currentUser.error) {
-      this.setState({
-        falseLogin: true
-      })
     } else {
       this.setState({
         currentUser,

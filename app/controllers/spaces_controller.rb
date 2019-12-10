@@ -6,7 +6,7 @@ class SpacesController < ApplicationController
   def index
     @spaces = Space.all.order(updated_at: :desc)
 
-    render json: @spaces, include: :pics
+    render json: @spaces, include: [:pics, :schedules]
   end
 
   # GET /spaces/1

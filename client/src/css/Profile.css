@@ -74,3 +74,28 @@ textarea{
   font-size: 1.3em;
   width:auto
 }
+
+.profile-schedules{
+  text-decoration: none;
+}
+
+.profile-schedule{
+  display:flex;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.profile-schedule img, .profile-schedule iframe{
+  height:200px;
+  width:300px;
+  object-fit: cover;
+}
+
+.profile-schedule img{
+  margin:1em
+}
+
+.profile-schedule .info{
+  width:auto;
+  text-decoration: none;
+}
