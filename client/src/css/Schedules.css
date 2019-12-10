@@ -1,0 +1,70 @@
+.bookings{
+  display:flex;
+  justify-content: space-evenly;
+  width:100%;
+  align-items: flex-start;
+}
+
+.schedules-space{
+  width:30%;
+  text-align: center;
+  border:1px solid black;
+  background-color: white;
+  position:sticky;
+  top: 20px;
+
+}
+
+.schedules-space img{
+  width:95%;
+  object-fit: cover;
+}
+
+.schedules-schedules{
+  width:50%;
+  background-color: white;
+  padding:0 2em
+}
+
+.schedules-schedules p{
+  font-size: 1.2em;
+}
+
+.schedules-notbooked button{
+  width:auto;
+  font-size: 1.2em;
+  margin:1em auto;
+  display:block;
+}
+
+.schedules-notbooked{
+  text-align:left
+}
+
+.bookings h2{
+  text-align: center;
+}
+
+#add-booking{
+  text-align: center;
+}
+
+.new-booking{
+  margin:2em;
+}
+
+.not-booked button{
+  margin: 0 0 1em 1em;
+}
+
+.not-booked{
+  border-bottom: 1px solid black;
+}
+
+.schedules-booked{
+  border-bottom: 2px solid black;
+}
+
+.schedules-booked{
+  text-align: left;
+}

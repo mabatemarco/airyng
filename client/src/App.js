@@ -10,6 +10,7 @@ import Yards from './components/Yards'
 import Rent from './components/Rent'
 import Yard from './components/Yard'
 import Profile from './components/Profile'
+import Schedules from './components/Schedules'
 
 class App extends React.Component {
   state = {
@@ -81,7 +82,7 @@ class App extends React.Component {
         currentUser,
         login: false
       })
-      this.props.history.push('/')
+      this.props.history.push('/yards')
     }
   }
 
@@ -92,7 +93,7 @@ class App extends React.Component {
       currentUser,
       login: false
     })
-    this.props.history.push('/')
+    this.props.history.push('/yards')
   }
 
   render() {
@@ -119,12 +120,20 @@ class App extends React.Component {
             <Route exact path='/' render={() => (
               <Front />)} />}
 
+          <Route exact path='/yards' render={() => (
+            <Yards
+              spaces={this.state.spaces}
+            />)} />
+
+          <Route path='/yard/:id' render={(props) => (
+            <Yard
+              yardId={props.match.params.id}
+              currentUser={this.state.currentUser}
+            />
+          )} />
+
           {this.state.currentUser &&
             <>
-              <Route exact path='/' render={() => (
-                <Yards
-                  spaces={this.state.spaces}
-                />)} />
 
               <Route path='/rent/:id' render={(props) => (
                 <Rent
@@ -134,16 +143,19 @@ class App extends React.Component {
                 />
               )} />
 
-              <Route path='/yard/:id' render={(props) => (
-                <Yard
-                  yardId={props.match.params.id}
-                />
-              )} />
 
               <Route path='/profile/:id' render={(props) => (
                 <Profile
-                profileId={props.match.params.id}
-                logout={this.handleLogout}
+                  currentUser={this.state.currentUser}
+                  profileId={props.match.params.id}
+                  logout={this.handleLogout}
+                />
+              )} />
+
+              <Route path='/schedules/:id' render={(props) => (
+                <Schedules
+                  currentUser={this.state.currentUser}
+                  spaceId={props.match.params.id}
                 />
               )} />
 

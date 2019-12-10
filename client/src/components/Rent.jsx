@@ -77,7 +77,7 @@ export default class Rent extends Component {
       } else {
         const response = await editSpace(parseInt(this.props.yardId),this.state.spaceData, this.state.images)
       }
-      this.props.history.push('/')
+      this.props.history.push('/yards')
     }
   }
 

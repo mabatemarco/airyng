@@ -31,17 +31,22 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <Link to='/'>
-          <img src={yardIcon} alt="grillin" />
-        </Link>
+        {this.props.currentUser ?
+          <Link to='/yards'>
+            <img src={yardIcon} alt="grillin" />
+          </Link> :
+          <Link to='/'>
+            <img src={yardIcon} alt="grillin" />
+          </Link>}
 
         <div className="links">
-          <Link to='/'>
-            Find Yards
-        </Link>
-          <Link to='/rent/new'>
-            Rent Your Yard
-        </Link>
+          <Link to='/yards'>
+            Browse Yards
+            </Link>
+          {this.props.currentUser &&
+            <Link to='/rent/new'>
+              Rent Your Yard
+        </Link>}
           {!this.props.currentUser ?
             <p onClick={this.props.loginToggle}>
               Login/Register
@@ -56,7 +61,7 @@ export default class Header extends React.Component {
               <Link onClick={() => { this.hamToggle(); this.menuToggle() }} to={`/profile/${this.props.currentUser.id}`}>
                 Profile
               </Link>
-            <p onClick={() => { this.props.logout(); this.hamToggle(); this.menuToggle() }}>
+              <p onClick={() => { this.props.logout(); this.hamToggle(); this.menuToggle() }}>
                 Log Out
               </p>
             </div>}

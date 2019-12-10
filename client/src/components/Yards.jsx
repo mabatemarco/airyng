@@ -29,8 +29,8 @@ export default class Yards extends Component {
             const address = space.street.split(' ').join('+')
             return (
               <div className="space" key={space.id}>
-                
-                {space.pics.length>0 &&
+
+                {space.pics.length > 0 &&
                   <div className="space-img">
                     {space.pics[0].img_url ?
                       <img src={space.pics[0].img_url} alt="" /> :

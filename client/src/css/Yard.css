@@ -12,6 +12,10 @@
   display:flex;
 }
 
+.yard-imgs img{
+  object-fit: cover;
+}
+
 .main-img{
   width:60%;
   height:100%;
@@ -46,7 +50,7 @@
 .description{
   text-align: right;
   margin: 1em 0 0 1em;
-  width:50%;
+  width:60%;
   border-right:1px solid black;
 }
 
@@ -60,10 +64,15 @@
   margin: 1em
 }
 
-.schedules{
-  width:30%;
+.yard-schedules{
+  width:40%;
   position:sticky;
   top:20px;
+}
+
+.yard-schedules iframe{
+  width:95%;
+  margin: 1em auto;
 }
 
 .yard-title{
@@ -83,13 +92,39 @@
   margin: 0 2em 0 0
 }
 
-.user-info a{
+.user-info p{
   display:block;
   margin:auto
+}
+
+.user-info img{
+  display:block;
 }
 
 .yard-map{
   width:90%;
   height:300px;
   margin: 0 auto;
+}
+
+.yard-times{
+  margin: 0 1em;
+  border-bottom: 1px solid black;
+}
+
+
+.yard-bookings button{
+  margin: 0 0 1em 1em;
+  display:block;
+  width:auto;
+  font-size: 1.2em;
+}
+
+.yard-bookings p{
+  text-align: left;
+  font-size: 1.2em;
+}
+
+#no-times{
+  margin-bottom: .5em;
 }

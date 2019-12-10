@@ -8,8 +8,16 @@
 
 .profile-img{
   width:30%;
-  margin:1em 2em 1em 3em;
-  border:1px solid black
+  margin:1em 4em 1em 4em;
+  border:1px solid black;
+}
+
+.profile-img img{
+  margin:0 auto;
+  border-radius: 100%;
+  width:80%;
+  height:300px;
+  object-fit: cover;
 }
 
 .profile-img input{
@@ -33,7 +41,7 @@
 .content{
   text-align:left;
   width:50%;
-  margin: .5em 0 0 0
+  margin: .1em 0 0 0
 }
 
 .content input{

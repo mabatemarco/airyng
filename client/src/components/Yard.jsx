@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import '../css/Yard.css';
 import { Link, withRouter } from 'react-router-dom'
-import { oneSpace } from '../services/api-helper.js';
+import { oneSpace, editSchedule } from '../services/api-helper.js';
 import yardClip from '../images/yardclip.jpg';
 import user from '../images/user.png'
 
 class Yard extends Component {
   state = {
     space: {},
-    address:'',
-    images: []
+    address: '',
+    images: [],
+    bookings: []
   }
 
   componentDidMount = async () => {
     const space = await oneSpace(this.props.yardId)
+    const sortedDates = space.schedules.sort((a, b) => new Date(a.date) - new Date(b.date))
+    this.sortBookings(sortedDates)
     const address = space.street.split(' ').join('+')
     this.setState({
       space,
       images: space.pics,
-      address
+      address,
     })
- 
-    
+  }
+
+  sortBookings = (schedules) => {
+    const bookings = schedules.filter(time => {
+      return !time.user_id
+    });
+    this.setState({
+      bookings
+    })
   }
 
   newMain = (e) => {
@@ -32,6 +42,18 @@ class Yard extends Component {
     images.unshift({ img_url: newMain });
     this.setState({
       images
+    })
+  }
+
+  bookYard = async (e) => {
+    e.preventDefault();
+    const booked = await editSchedule(this.state.space.id, e.target.value, this.props.currentUser.id)
+    const schedules = this.state.bookings
+    const bookings = schedules.filter(time => (
+      booked.id!==time.id
+    ))
+    this.setState({
+      bookings
     })
   }
 
@@ -101,14 +123,26 @@ class Yard extends Component {
                       <img src={this.state.space.user.img_url} alt="" /> :
                       <img src={user} alt="" />
                     }
-                  <p onClick={() => { this.props.history.push(`/profile/${this.state.space.user.id}`) }}>{this.state.space.user.username}</p>
+                    <p onClick={() => { this.props.history.push(`/profile/${this.state.space.user.id}`) }}>{this.state.space.user.username}</p>
                   </div>}
               </div>
               <p>{this.state.space.description}</p>
             </div>
-            <div className="schedules">
-            <iframe className='yard-map' src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${this.state.address},${this.state.space.city}+${this.state.space.state}`}></iframe>
-              <h2>Availability</h2>
+            <div className="yard-schedules">
+              <iframe className='yard-map' src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${this.state.address},${this.state.space.city}+${this.state.space.state}`}></iframe>
+              <div className="yard-bookings">
+                <h2>Availability</h2>
+                {this.state.bookings.length === 0 ?
+                  <p id='no-times' className='yard-times'>No available times</p> :
+                  this.state.bookings.map(time => (
+                    <div key={time.id} className="yard-times">
+                      <p>{time.date}: {time.start_time}-{time.end_time} &mdash; ${time.rate}</p>
+                      {this.props.currentUser &&
+                        <button value={time.id} onClick={this.bookYard}>Book yard</button>}
+                    </div>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </div>

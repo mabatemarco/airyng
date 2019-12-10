@@ -11,7 +11,7 @@ class SpacesController < ApplicationController
 
   # GET /spaces/1
   def show
-    render json: @space, include: [:user, :schedules, :pics]
+    render json: @space, include: [:user, {schedules: {include: :user}}, :pics]
   end
 
   # POST spaces

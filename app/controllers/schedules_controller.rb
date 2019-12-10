@@ -17,10 +17,11 @@ class SchedulesController < ApplicationController
 
   # POST /schedules
   def create
-    @schedule = Schedule.new(schedule_params)
+    @space=Space.find(params[:space_id])
+    @schedule = @space.schedules.new(schedule_params)
 
     if @schedule.save
-      render json: @schedule, status: :created, location: @schedule
+      render json: @schedule, status: :created
     else
       render json: @schedule.errors, status: :unprocessable_entity
     end
@@ -38,6 +39,7 @@ class SchedulesController < ApplicationController
   # DELETE /schedules/1
   def destroy
     @schedule.destroy
+    render json: @schedule
   end
 
   private
@@ -48,6 +50,6 @@ class SchedulesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def schedule_params
-      params.require(:schedule).permit(:start_time, :end_time, :booked, :space_id)
+      params.require(:schedule).permit(:date, :rate, :start_time, :end_time, :booked, :space_id, :user_id)
     end
 end

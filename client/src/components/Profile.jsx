@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 export default class Profile extends Component {
   state = {
     user: {
-      id:'',
       username: '',
       name: '',
       email: '',
@@ -17,22 +16,22 @@ export default class Profile extends Component {
     },
     spaces: [],
     rentals: [],
-    edit: false
+    edit: false,
+    id: ''
   }
 
   componentDidMount = async () => {
     const user = await getUser(this.props.profileId)
-    const spaces = await getUserSpaces(user.id)
-    const { id, username, email, img_url, about_me, name, schedules } = user
+    const { id, username, email, img_url, about_me, name, schedules, spaces } = user
     this.setState({
       user: {
-        id,
         username,
         name,
         email,
         img_url,
         about_me
       },
+      id,
       spaces,
       rentals: schedules,
       edit: false
@@ -57,7 +56,11 @@ export default class Profile extends Component {
   }
 
   profileEdit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    editUser(parseInt(this.state.id), this.state.user);
+    this.setState({
+      edit: false
+    })
   }
 
   profileDelete = (e) => {
@@ -76,7 +79,7 @@ export default class Profile extends Component {
               <img src={this.state.user.img_url} alt="" /> :
               <img src={user} alt="" />}
             {this.state.edit &&
-              <input name='img_url' type='img_url' placeholder="Image URL" value={this.state.user.img_url} onChange={this.props.handleChange} />
+              <input name='img_url' type='img_url' placeholder="Image URL" value={this.state.user.img_url} onChange={this.handleChange} />
             }
           </div>
           <div className="profile-info">
@@ -89,10 +92,10 @@ export default class Profile extends Component {
             <div className="content">
               {this.state.edit ?
                 <>
-                  <input name='username' type='username' value={this.state.user.username} onChange={this.props.handleChange} />
-                  <input name='name' type='name' value={this.state.user.name} onChange={this.props.handleChange} />
-                  <input name='email' type='email' value={this.state.user.email} onChange={this.props.handleChange} />
-                  <textarea name='about_me' type='about_me' value={this.state.user.about_me} onChange={this.props.handleChange} />
+                  <input name='username' type='username' value={this.state.user.username} onChange={this.handleChange} />
+                  <input name='name' type='name' value={this.state.user.name} onChange={this.handleChange} />
+                  <input name='email' type='email' value={this.state.user.email} onChange={this.handleChange} />
+                  <textarea name='about_me' type='about_me' value={this.state.user.about_me} onChange={this.handleChange} />
                 </> :
                 <>
                   <h3>{this.state.user.username}</h3>
@@ -104,20 +107,22 @@ export default class Profile extends Component {
                   }
                 </>
               }
-              {this.state.edit ?
-                <button onClick={this.profileEdit}>Save</button>
-                :
-                <>
-                  <button onClick={this.editToggle}>Edit Profile</button>
-                  <button onClick={this.profileDelete}>Delete Profile</button>
-                </>
-              }
+              {this.props.currentUser.id === this.state.id &&
+                <>{
+                  this.state.edit ?
+                    <button onClick={this.profileEdit}>Save</button>
+                    :
+                    <>
+                      <button onClick={this.editToggle}>Edit Profile</button>
+                      <button onClick={this.profileDelete}>Delete Profile</button>
+                    </>
+                }</>}
             </div>
           </div>
         </div>
-        {this.state.spaces.length>0 &&
+        {this.state.spaces.length > 0 &&
           <>
-            <h2>My Yards</h2>
+            <h2>Yards</h2>
             <div className="spaces">
               {this.state.spaces.map(space => {
                 const address = space.street.split(' ').join('+')
@@ -135,14 +140,15 @@ export default class Profile extends Component {
                       <div className="blurb">
                         <p>{space.description}</p>
                       </div>
-                      <div className="buttons">
-                        <Link to={`/rent/${space.id}`}>
-                          <button>Edit Yard</button>
-                        </Link>
-                        <Link to={`/bookings/${space.id}`}>
-                          <button>Bookings and Schedule</button>
-                        </Link>
-                      </div>
+                      {this.props.currentUser.id === this.state.id &&
+                        <div className="buttons">
+                          <Link to={`/rent/${space.id}`}>
+                            <button>Edit Yard</button>
+                          </Link>
+                          <Link to={`/schedules/${space.id}`}>
+                            <button>Bookings and Schedule</button>
+                          </Link>
+                        </div>}
                     </div>
                     <iframe src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${address},${space.city}+${space.state}`}></iframe>
                   </div>)

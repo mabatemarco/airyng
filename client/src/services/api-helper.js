@@ -49,8 +49,8 @@ export const getUser = async (id) => {
   return response.data
 }
 
-export const editUser = async (id) => {
-  const user = await api.put(`users/${id}`)
+export const editUser = async (id, userData) => {
+  const user = await api.put(`users/${id}`, {user:userData})
 }
 
 export const deleteUser = async (id) => {
@@ -64,11 +64,6 @@ export const allSpaces = async () => {
 
 export const oneSpace = async (id) => {
   const response = await api.get(`/spaces/${id}`)
-  return response.data
-}
-
-export const getUserSpaces = async (id) => {
-  const response = await api.get(`/users/${id}/spaces`)
   return response.data
 }
 
@@ -98,4 +93,19 @@ export const addPic = async (id, data) => {
 
 export const deletePic = async (id) => {
   await api.delete(`/spaces/${id}/pics`)
+}
+
+export const createSchedule = async (id, scheduleData) => {
+  const response = await api.post(`spaces/${id}/schedules`, scheduleData )
+  return response.data
+}
+
+export const deleteSchedule = async (spaceId, scheduleId) => {
+  const response = await api.delete(`spaces/${spaceId}/schedules/${scheduleId}`)
+  return response.data
+}
+
+export const editSchedule = async (spaceId, scheduleId, userId) => {
+  const response = await api.put(`spaces/${spaceId}/schedules/${scheduleId}`,{user_id:userId})
+  return response.data
 }
