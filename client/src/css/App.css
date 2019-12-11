@@ -15,4 +15,5 @@ main{
 .error p{
   color:red;
   font-size: 1em;
+  text-align: center;
 }

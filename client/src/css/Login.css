@@ -61,3 +61,14 @@ p{
   opacity:1;
   cursor: pointer;
 }
+
+@media (max-width:1050px){
+  .modal button{
+    width:auto
+  }
+
+  .modal{
+    width:70%;
+    left:15%
+  }
+}

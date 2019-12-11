@@ -55,6 +55,7 @@ class Yard extends Component {
     this.setState({
       bookings
     })
+    alert('Your booking had been completed.  Manage your bookings from your profile page.')
   }
 
   imageLayout = () => {

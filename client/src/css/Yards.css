@@ -79,9 +79,45 @@ iframe{
 .yards-search input{
   width:15%;
   margin: auto 2em auto 1em;
-  height:20px
+  height:20px;
+  border:1px solid black;
 }
 
 .yards-search label{
   margin:auto
+}
+
+@media (max-width:900px){
+  .space{
+    width: 98%
+  }
+}
+
+@media (max-width:700px){
+  .yards-search input{
+    display:block;
+    margin:0.3em auto;
+    width:60%
+  }
+}
+
+@media (max-width:650px){
+  .space{
+    display:block;
+    box-sizing: border-box;
+  }
+
+  .space button{
+    position:static;
+    display:block;
+    margin: 0.5em auto;
+  }
+
+  .space iframe, .space .space-img, .space .info{
+    box-sizing: border-box;
+    display:block;
+    width:98%;
+    margin:0 auto;
+    padding:0;
+  }
 }

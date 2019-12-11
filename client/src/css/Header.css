@@ -113,3 +113,15 @@ header p{
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
+
+@media (max-width:550px){
+  header a, header p{
+    margin: 0 .5em;
+    font-size: 1em;
+    width:auto
+  }
+
+  .ham-icon{
+    width:30px;
+  }
+}

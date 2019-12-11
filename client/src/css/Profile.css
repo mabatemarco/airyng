@@ -30,7 +30,14 @@
 
 .profile-info{
   display:flex;
-  width:60%
+  width:60%;
+  margin-top: 2em;
+}
+
+.title{
+  border-top: 3px solid black;
+  padding-top: .5em;
+  font-size: 3em;
 }
 
 .titles{
@@ -98,4 +105,55 @@ textarea{
 .profile-schedule .info{
   width:auto;
   text-decoration: none;
+}
+
+@media (max-width:1000px){
+  .profile-schedule{
+    display:block
+  }
+
+  .profile-schedule img, .profile-schedule iframe{
+    width:80%;
+    margin: 0 auto;
+    height:300px
+  }
+}
+
+@media (max-width:750px){
+  .user-info{
+    display:block;
+    margin:0 auto;
+  }
+
+  .profile-img, .profile-info{
+    width:90%;
+    margin: 1em auto;
+  }
+
+  .space{
+    display:block;
+    box-sizing: border-box;
+    text-align: center;
+    margin: .5em auto
+  }
+
+  .space .buttons{
+    position:static;
+    display:block;
+    margin: 0.5em auto
+  }
+
+  .space iframe, .space .space-img, .space .info{
+    box-sizing: border-box;
+    display:block;
+    width:98%;
+    margin:0 auto;
+    padding:0;
+  }
+}
+
+@media (max-width:600px){
+  .profile-schedule img, .profile-schedule iframe{
+    height:150px
+  }
 }

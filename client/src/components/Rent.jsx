@@ -16,7 +16,8 @@ export default class Rent extends Component {
     },
     update: false,
     images: [],
-    newImage: ''
+    newImage: '',
+    error:''
   }
 
   componentDidMount = () => {
@@ -78,6 +79,10 @@ export default class Rent extends Component {
         const response = await editSpace(parseInt(this.props.yardId),this.state.spaceData, this.state.images)
       }
       this.props.history.push('/profile/${')
+    } else {
+      this.setState({
+        error: 'All fields must be filled out'
+      })
     }
   }
 
@@ -138,6 +143,9 @@ export default class Rent extends Component {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="error">
+            <p>{this.state.error}</p>
           </div>
           <div className="rent-pics">
             <label htmlFor='img_url'>Image URL <small>(max 5, click images to remove)</small></label><br />

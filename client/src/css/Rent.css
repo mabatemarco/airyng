@@ -102,3 +102,25 @@
   object-fit: cover;
   margin:1em;
 }
+
+@media (max-width:500px){
+  .rent-flex{
+    display:block;
+  }
+
+  .rent button{
+    width:auto
+  }
+
+  .left, .right{
+    margin: 0 auto
+  }
+
+  .rent h1{
+    width:auto
+  }
+
+  .rent input{
+    width:100%
+  }
+}

@@ -4,6 +4,11 @@
   text-align: center;
 }
 
+.no-spaces{
+  background-color: white;
+  width:80%
+}
+
 .yard-imgs{
   height:400px;
   width:100%;
@@ -128,4 +133,56 @@
 
 #no-times{
   margin-bottom: .5em;
+}
+
+@media (max-width:900px){
+  .yard-imgs{
+    display:block;
+    height:400px;
+    background-color: white;
+  }
+
+  .other-imgs{
+    display:none
+  }
+
+  .main-img{
+    border-right: none;
+    width:100%;
+    height:100%
+  }
+}
+
+@media (max-width:800px){
+  .flex{
+    display:block
+  }
+
+  .description, .yard-schedules{
+    width:95%;
+    margin:0 auto
+  }
+
+  .description{
+    border-right: none;
+    text-align: center;
+  }
+}
+
+@media (max-width:500px){
+  .yard-title{
+    display:block;
+  }
+
+  .user-info{
+    margin: 0 auto;
+  }
+
+  .user-info p{
+    margin:auto auto auto 0 
+  }
+
+  .user-info img{
+    margin: 0 0 0 auto
+  }
 }

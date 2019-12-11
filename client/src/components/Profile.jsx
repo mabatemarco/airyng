@@ -22,7 +22,11 @@ export default class Profile extends Component {
 
   componentDidMount = async () => {
     const user = await getUser(this.props.profileId)
-    const { id, username, email, img_url, about_me, name, schedules, spaces } = user
+    const dates = user.schedules.filter(time => (
+      new Date(time.date)>=new Date()
+    ))
+    const schedules = dates.sort((a, b) => new Date(a.date) - new Date(b.date))
+    const { id, username, email, img_url, about_me, name, spaces } = user
     this.setState({
       user: {
         username,
@@ -122,7 +126,7 @@ export default class Profile extends Component {
         </div>
         {this.state.spaces.length > 0 &&
           <>
-            <h2>Yards</h2>
+            <h2 className='title'>Yards</h2>
             <div className="spaces">
               {this.state.spaces.map(space => {
                 const address = space.street.split(' ').join('+')
@@ -158,7 +162,7 @@ export default class Profile extends Component {
         }
         {this.state.schedules.length > 0 &&
           <div className="profile-schedules">
-            <h2>Upcoming Rentals</h2>
+            <h2 className='title'>Upcoming Rentals</h2>
           {this.state.schedules.map(time => (
               <Link to={`/yard/${time.space.id}`}>
               <div className="profile-schedule">
