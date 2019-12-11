@@ -122,7 +122,7 @@ export default class Schedules extends Component {
                       <img src={user} />}
                     <Link to={`/profile/${time.user.id}`}>{time.user.name}</Link>
                   </div>
-                  <p>{time.date}: {time.start_time}-{time.end_time} &mdash; ${time.rate}</p>
+                  <p><strong>{time.date.substr(6,time.date.length-1)}-{time.date.substr(0,4)}</strong>: {time.start_time}-{time.end_time} &mdash; ${time.rate}</p>
                 </div>
               ))}
           </div>

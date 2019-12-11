@@ -168,7 +168,7 @@ export default class Profile extends Component {
               <div className="profile-schedule">
                 <div className="info">
                   <h2>{time.space.name}</h2>
-                  <p>{time.date}: {time.start_time}-{time.end_time}</p>
+                  <p><strong>{time.date.substr(6,time.date.length-1)}-{time.date.substr(0,4)}</strong> : {time.start_time}-{time.end_time}</p>
                 </div>
                 <img src={time.space.pics[0].img_url} alt="" />
                 <iframe src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDqfjjFh8hQa3iUyBesMdEkwbMgbFeeJeo&q=${time.space.street.split(' ').join('+')},${time.space.city}+${time.space.state}`}></iframe>

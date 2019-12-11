@@ -87,6 +87,11 @@ textarea{
   text-decoration: none;
 }
 
+.profile-schedules a{
+  text-decoration: none;
+  color:black
+}
+
 .profile-schedule{
   display:flex;
   justify-content: center;
