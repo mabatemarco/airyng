@@ -4,8 +4,8 @@ const zipURL = 'http://ip-api.com/json'
 const nearbyZipApi = 'oUbaIQVCBJn52ff2fq20V65SsYFM6tQHWPsPQqp0EIZOUkZBrLti8vBwDOWMyZ6D'
 
 
-// const baseUrl='https://airyng.herokuapp.com'
-const baseUrl = 'http://localhost:3000'
+const baseUrl='https://airyng.herokuapp.com'
+// const baseUrl = 'http://localhost:3000'
 
 const api = axios.create({
   baseURL: baseUrl

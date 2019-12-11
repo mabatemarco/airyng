@@ -37,11 +37,6 @@ class App extends React.Component {
         this.props.history.push('/yards')
       }
     }
-    // let currentZip = await getZip();
-    // currentZip = parseInt(currentZip)
-    // this.setState({
-    //   currentZip
-    // })
   }
 
 
