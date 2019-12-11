@@ -87,6 +87,12 @@ iframe{
   margin:auto
 }
 
+.no-spaces{
+  background-color: white;
+  width:80%;
+  margin: 1em auto
+}
+
 @media (max-width:900px){
   .space{
     width: 98%
