@@ -45,8 +45,9 @@ iframe{
   padding:.5em 0;
   color: black;
   text-shadow: 1px 1px white;
-  background-color:white;
-  width:40%;
+  background-image: linear-gradient(-90deg, grey, white, grey);
+
+  width:auto;
   border: 1px solid black;
 }
 
@@ -63,7 +64,7 @@ iframe{
 
 .yards-search{
   width:70%;
-  background:white;
+  background-image: linear-gradient(-90deg, grey, white, grey);
   margin:0 auto;
   border:2px solid black;
   font-size: 1.3em;
@@ -88,7 +89,7 @@ iframe{
 }
 
 .no-spaces{
-  background-color: white;
+  background-image: linear-gradient(-90deg, grey, white, grey);
   width:80%;
   margin: 1em auto
 }

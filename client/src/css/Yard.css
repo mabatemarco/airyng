@@ -1,6 +1,7 @@
 .yard{
   border: 1px solid black;
-  background-color: white;
+  background-image: linear-gradient(-90deg, grey, white, grey);
+
   text-align: center;
 }
 
