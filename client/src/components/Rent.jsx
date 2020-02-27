@@ -17,7 +17,7 @@ export default class Rent extends Component {
     update: false,
     images: [],
     newImage: '',
-    error:''
+    error: ''
   }
 
   componentDidMount = () => {
@@ -37,7 +37,7 @@ export default class Rent extends Component {
 
   getSpace = async (id) => {
     const space = await oneSpace(id)
-    const images = space.pics.map(pic=>{return pic.img_url});
+    const images = space.pics.map(pic => { return pic.img_url });
     const { name, description, street, city, state, zip } = space;
     this.setState({
       images,
@@ -72,11 +72,11 @@ export default class Rent extends Component {
 
   spaceSubmit = async (e) => {
     e.preventDefault()
-    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length > 0 &&this.state.images.length<6) {
+    if (this.state.spaceData.street && this.state.spaceData.description && this.state.spaceData.street && this.state.spaceData.city && this.state.spaceData.state && this.state.spaceData.zip && this.state.images.length > 0 && this.state.images.length < 6) {
       if (this.state.update === false) {
         const response = await createSpace(this.state.spaceData, this.state.images)
       } else {
-        const response = await editSpace(parseInt(this.props.yardId),this.state.spaceData, this.state.images)
+        const response = await editSpace(parseInt(this.props.yardId), this.state.spaceData, this.state.images)
       }
       this.props.history.push('/profile/${')
     } else {

@@ -4,11 +4,11 @@ const zipURL = 'http://ip-api.com/json'
 const nearbyZipApi = 'oUbaIQVCBJn52ff2fq20V65SsYFM6tQHWPsPQqp0EIZOUkZBrLti8vBwDOWMyZ6D'
 
 
-const baseUrl='https://airyng.herokuapp.com'
+const baseUrl = 'https://airyng.herokuapp.com'
 // const baseUrl = 'http://localhost:3000'
 
 const api = axios.create({
-  baseURL: baseUrl
+  baseURL: baseUrl,
 })
 
 
@@ -50,7 +50,7 @@ export const getUser = async (id) => {
 }
 
 export const editUser = async (id, userData) => {
-  const user = await api.put(`users/${id}`, {user:userData})
+  const user = await api.put(`users/${id}`, { user: userData })
 }
 
 export const deleteUser = async (id) => {
@@ -96,7 +96,7 @@ export const deletePic = async (id) => {
 }
 
 export const createSchedule = async (id, scheduleData) => {
-  const response = await api.post(`spaces/${id}/schedules`, scheduleData )
+  const response = await api.post(`spaces/${id}/schedules`, scheduleData)
   return response.data
 }
 
@@ -106,6 +106,6 @@ export const deleteSchedule = async (spaceId, scheduleId) => {
 }
 
 export const editSchedule = async (spaceId, scheduleId, userId) => {
-  const response = await api.put(`spaces/${spaceId}/schedules/${scheduleId}`,{user_id:userId})
+  const response = await api.put(`spaces/${spaceId}/schedules/${scheduleId}`, { user_id: userId })
   return response.data
 }

@@ -22,7 +22,7 @@ export default function Front() {
         <div className="about-card">
           <h2>Private Outdoor Spaces</h2>
           <img src={backyard4} alt="" />
-          <p>Enjoy the summer and the beautiful green spaces your city has to offer without the frustrations of public spaces.  Spend time with you friends and family in clean and private yards.</p>
+          <p>Enjoy the summer and the beautiful green spaces your city has to offer without the frustrations of public spaces.  Spend time with your friends and family in clean and private yards.</p>
         </div>
         <div className="about-card">
           <h2>Earn Money</h2>
